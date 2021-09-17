@@ -8,6 +8,7 @@ const createUserJwt = (user) => {
         email: user.email,
         isAdmin: user.isAdmin || false,
     }
+    return generateToken(payload)
 }
 
 const validateToken = (token) => {
@@ -19,7 +20,7 @@ const validateToken = (token) => {
     }
 }
 
-modules.exports = {
+module.exports = {
     generateToken,
     createUserJwt,
     validateToken,

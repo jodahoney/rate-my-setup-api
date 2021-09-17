@@ -21,6 +21,8 @@ const extractUserFromJwt = (req, res, next) => {
         if (token) {
             res.locals.user = jwt.verify(token, SECRET_KEY)
         }
+
+        return next()
     } catch(err) {
         return next()
     }
@@ -34,12 +36,13 @@ const requireAuthenticatedUser = (req, res, next) => {
         if(!user?.email) {
             throw new UnauthorizedError()
         }
+        return next()
     } catch(err) {
         return next(err)
     }
 }
 
-modules.exports = {
+module.exports = {
     extractUserFromJwt,
     requireAuthenticatedUser,
 }
